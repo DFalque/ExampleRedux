@@ -1,11 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleImportantOf } from "../noteReducer";
+import { toggleImportantOf } from "../redux/actions/noteActions";
 
 const Notes = () => {
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
+  // COGEMOS LAS NOTAS
+  const state = useSelector((state) =>
+    state.notes.filter((note) => {
+      if (state.filter === "all") {
+        return state.notes;
+      } else if (state.filter === "important") {
+        return note.important === true;
+      } else if (state.filter === "not important") {
+        return note.important === false;
+      }
+    })
+  );
 
+  // CAMBIAR EL STORE
+  const dispatch = useDispatch();
   const toggleImportant = (id) => {
     dispatch(toggleImportantOf(id));
   };
