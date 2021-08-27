@@ -12,6 +12,7 @@ const initialState = [
 ];
 
 export const noteReducer = (state = initialState, action) => {
+  //return action( state )
   if (action.type === "@notes/created") {
     return state.concat(action.payload);
   }
